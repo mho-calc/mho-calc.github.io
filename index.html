@@ -15,9 +15,9 @@
 
 
 
-	<script src="scripts/vendor.9fcc1816.js"></script>
+	<script src="scripts/vendor.a43219e2.js"></script>
 
-<script src="scripts/main.892c8e8a.js"></script>
+<script src="scripts/main.72db1384.js"></script>
 </head>
 <body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
@@ -33,7 +33,7 @@
 		<section ms-repeat-skill="selected" class="selected">
 			<header>{{skill.n}}</header>
 			<i class="icon-circle-with-minus" ms-click="skillMinus(skill)"></i>
-			<input ms-duplex="skill.r" />
+			<input ms-duplex-number="skill.r" type="number"/>
 			<i class="icon-circle-with-plus" ms-click="skillPlus(skill)"></i>
 			<i class="icon-circle-with-cross" ms-click="$remove"></i>
 		</section>
