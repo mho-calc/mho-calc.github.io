@@ -1,0 +1,58 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mho半自动配装器</title>
+<!-- Place favicon.ico in the root directory -->
+
+
+
+<link rel="stylesheet" href="styles/main.b8948714.css">
+
+
+
+	<script src="scripts/vendor.a1be5044.js"></script>
+
+<script src="scripts/main.b1cd1507.js"></script>
+</head>
+<body ms-controller="mho">
+<!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="page-wide">
+	<section class="with-header">
+		<header>条件选择</header>
+		<section class="ranged-select">
+			<label for="ranged0" ms-class="cur:!ranged">近战</label><input type="radio" name="ranged" id="ranged0" value="false" ms-duplex-boolean="ranged"/>
+			<label for="ranged1" ms-class="cur:ranged">远程</label><input type="radio" name="ranged" id="ranged1" value="true" ms-duplex-boolean="ranged"/>
+		</section>
+		<section ms-repeat-skill="selected" class="skill-select">
+			<header>{{skill.n}}</header>
+			<i class="icon-circle-with-minus" ms-click="skillMinus(skill)"></i>
+			<input ms-duplex="skill.r" />
+			<i class="icon-circle-with-plus" ms-click="skillPlus(skill)"></i>
+			<i class="icon-circle-with-cross" ms-click="removeSkill($index)"></i>
+		</section>
+		<footer><a class="btn" href="javascript:;" ms-click="listSkill">添加需求</a></footer>
+	</section>
+	<section class="with-header" ms-if="chosen.size() > 0">
+		<header>配装结果</header>
+		<section ms-repeat-armor="chosen" class="armor-select">
+			{{armor.n}}（{{armor.h}}）：{{skillJoin(armor.s)}}
+		</section>
+	</section>
+
+	<footer><a class="btn" href="javascript:;" ms-click="calc" ms-if="selected.size() != 0">开始配装</a><a class="btn" href="javascript:;" ms-click="reload">重新读取数据</a></footer>
+</div>
+
+<div ms-if="popup != ''" class="popup" ms-click="hidePopup">
+	<div class="content" ms-if="popup == 'skill_choose'">
+		<a ms-repeat-skill="skill" class="skill btn" href="javascript:;" ms-click="addSkill(skill.n,skill.v,$index)">{{skill.n}}</a>
+	</div>
+</div>
+</body>
+</html>
