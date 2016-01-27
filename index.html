@@ -11,13 +11,13 @@
 
 
 
-<link rel="stylesheet" href="styles/main.0f2027c9.css">
+<link rel="stylesheet" href="styles/main.e1946927.css">
 
 
 
-	<script src="scripts/vendor.4f446e99.js"></script>
+	<script src="scripts/vendor.ceaa95d7.js"></script>
 
-<script src="scripts/main.c3bb1ae4.js"></script>
+<script src="scripts/main.5c52a645.js"></script>
 </head>
 <body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
@@ -69,12 +69,21 @@
 </div>
 
 <div ms-if="popup != ''" class="popup" ms-click="hidePopup">
-	<div class="content" ms-if="popup == 'skill_choose'">
-		<div class="condition">
-			<label for="condition"><i class="icon-magnifying-glass"></i></label>
-			<input name="condition" ms-duplex="condition" placeholder="输入技能名查找"/>
+	<div class="popup-wrap">
+		<div class="content" ms-if="popup == 'skill_choose'">
+			<div class="condition">
+				<label for="condition"><i class="icon-magnifying-glass"></i></label>
+				<input name="condition" ms-duplex="condition" placeholder="输入技能名查找"/>
+			</div>
+			<a ms-repeat-skill="skill" class="skill btn" href="javascript:;" ms-click="addSkill(skill.n,skill.v,$index)">{{skill.n}}</a>
 		</div>
-		<a ms-repeat-skill="skill" class="skill btn" href="javascript:;" ms-click="addSkill(skill.n,skill.v,$index)">{{skill.n}}</a>
+		<div class="content" ms-if="popup == 'loading'">
+			{{info}}
+		</div>
+		<div class="content" ms-if="popup == 'before_loading'">
+			初次载入或重新读取数据会载入2m多的数据文件，建议不要在移动环境载入，避免燃烧流量<br>
+			<a class="btn" href="javascript:;" ms-click="load">确定载入</a>
+		</div>
 	</div>
 </div>
 </body>
