@@ -11,15 +11,15 @@
 
 
 
-<link rel="stylesheet" href="styles/main.b8948714.css">
+<link rel="stylesheet" href="styles/main.0f2027c9.css">
 
 
 
-	<script src="scripts/vendor.a1be5044.js"></script>
+	<script src="scripts/vendor.4f446e99.js"></script>
 
-<script src="scripts/main.b1cd1507.js"></script>
+<script src="scripts/main.c3bb1ae4.js"></script>
 </head>
-<body ms-controller="mho">
+<body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -30,19 +30,38 @@
 			<label for="ranged0" ms-class="cur:!ranged">近战</label><input type="radio" name="ranged" id="ranged0" value="false" ms-duplex-boolean="ranged"/>
 			<label for="ranged1" ms-class="cur:ranged">远程</label><input type="radio" name="ranged" id="ranged1" value="true" ms-duplex-boolean="ranged"/>
 		</section>
-		<section ms-repeat-skill="selected" class="skill-select">
+		<section ms-repeat-skill="selected" class="selected">
 			<header>{{skill.n}}</header>
 			<i class="icon-circle-with-minus" ms-click="skillMinus(skill)"></i>
 			<input ms-duplex="skill.r" />
 			<i class="icon-circle-with-plus" ms-click="skillPlus(skill)"></i>
-			<i class="icon-circle-with-cross" ms-click="removeSkill($index)"></i>
+			<i class="icon-circle-with-cross" ms-click="$remove"></i>
 		</section>
 		<footer><a class="btn" href="javascript:;" ms-click="listSkill">添加需求</a></footer>
 	</section>
-	<section class="with-header" ms-if="chosen.size() > 0">
+
+	<section class="with-header" ms-if="armor.size() > 0">
 		<header>配装结果</header>
-		<section ms-repeat-armor="chosen" class="armor-select">
-			{{armor.n}}（{{armor.h}}）：{{skillJoin(armor.s)}}
+		<section ms-repeat-armor="armor" class="chosen" ms-class="on:armor.o">
+			<header>{{armor.n}}（{{armor.h}}）</header>
+			：{{skillJoin(armor.s)}}
+			/材料：{{armor.m}}
+			<i class="icon-chevron-with-circle-right" ms-click="showChosen(armor)"></i>
+		</section>
+	</section>
+
+	<section class="with-header" ms-if="armor.size() > 0">
+		<header>已拥有技能</header>
+		<section ms-repeat="own" class="own"><span>{{el.n}}</span>:{{el.v}}</section>
+	</section>
+
+	<section class="with-header" ms-if="gem.size() > 0">
+		<header>待选择技能珠</header>
+		<section ms-repeat-gem="gem" class="chosen" ms-class="on:gem.o">
+			<header>{{gem.n}}</header>
+			：{{skillJoin(gem.s)}}
+			/材料：{{gem.m}}
+			<i class="icon-chevron-with-circle-right" ms-click="showChosen(gem)"></i>
 		</section>
 	</section>
 
@@ -51,6 +70,10 @@
 
 <div ms-if="popup != ''" class="popup" ms-click="hidePopup">
 	<div class="content" ms-if="popup == 'skill_choose'">
+		<div class="condition">
+			<label for="condition"><i class="icon-magnifying-glass"></i></label>
+			<input name="condition" ms-duplex="condition" placeholder="输入技能名查找"/>
+		</div>
 		<a ms-repeat-skill="skill" class="skill btn" href="javascript:;" ms-click="addSkill(skill.n,skill.v,$index)">{{skill.n}}</a>
 	</div>
 </div>
