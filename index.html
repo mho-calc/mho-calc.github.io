@@ -11,13 +11,13 @@
 
 
 
-<link rel="stylesheet" href="styles/main.e1946927.css">
+<link rel="stylesheet" href="styles/main.a65c3c71.css">
 
 
 
-	<script src="scripts/vendor.ca400cb1.js"></script>
+	<script src="scripts/vendor.ee46bd88.js"></script>
 
-<script src="scripts/main.5bff76b5.js"></script>
+<script src="scripts/main.6691c1cf.js"></script>
 </head>
 <body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
@@ -40,6 +40,8 @@
 		<footer><a class="btn" href="javascript:;" ms-click="listSkill">添加需求</a></footer>
 	</section>
 
+	<footer><a class="btn" href="javascript:;" ms-click="calc" ms-if="selected.size() != 0">开始配装</a><a class="btn" href="javascript:;" ms-click="reload">重新读取数据</a></footer>
+
 	<section class="with-header" ms-if="armor.size() > 0">
 		<header>配装结果</header>
 		<section ms-repeat-armor="armor" class="chosen" ms-class="on:armor.o">
@@ -56,7 +58,7 @@
 	</section>
 
 	<section class="with-header" ms-if="gem.size() > 0">
-		<header>待选择技能珠</header>
+		<header>可选择的技能珠</header>
 		<section ms-repeat-gem="gem" class="chosen" ms-class="on:gem.o">
 			<header>{{gem.n}}</header>
 			：{{skillJoin(gem.s)}}
@@ -65,7 +67,22 @@
 		</section>
 	</section>
 
-	<footer><a class="btn" href="javascript:;" ms-click="calc" ms-if="selected.size() != 0">开始配装</a><a class="btn" href="javascript:;" ms-click="reload">重新读取数据</a></footer>
+	<section class="with-header" ms-if="stone.size() > 0">
+		<header>可选择的护石及其上限</header>
+		<table class="stone">
+			<tr>
+				<th></th>
+				<th>兵士</th>
+				<th>斗士</th>
+				<th>骑士</th>
+				<th>女王</th>
+				<th>龙</th>
+			</tr>
+			<tr ms-repeat-list="stone">
+				<td ms-repeat="list">{{el}}</td>
+			</tr>
+		</table>
+	</section>
 </div>
 
 <div ms-if="popup != ''" class="popup" ms-click="hidePopup">
@@ -75,7 +92,7 @@
 				<label for="condition"><i class="icon-magnifying-glass"></i></label>
 				<input name="condition" ms-duplex="condition" placeholder="输入技能名查找"/>
 			</div>
-			<a ms-repeat-skill="skill" class="skill btn" href="javascript:;" ms-click="addSkill(skill.n,skill.v,$index)">{{skill.n}}</a>
+			<a ms-repeat-skill="skill" class="skill btn" href="javascript:;" ms-click="addSkill(skill,$index)">{{skill.n}}</a>
 		</div>
 		<div class="content" ms-if="popup == 'loading'">
 			{{info}}
