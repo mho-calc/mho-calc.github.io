@@ -11,13 +11,13 @@
 
 
 
-<link rel="stylesheet" href="styles/main.a65c3c71.css">
+<link rel="stylesheet" href="styles/main.3b1b3f9f.css">
 
 
 
-	<script src="scripts/vendor.ee46bd88.js"></script>
+	<script src="scripts/vendor.a2b8db4e.js"></script>
 
-<script src="scripts/main.6691c1cf.js"></script>
+<script src="scripts/main.72e7eb62.js"></script>
 </head>
 <body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
@@ -54,7 +54,8 @@
 
 	<section class="with-header" ms-if="armor.size() > 0">
 		<header>已拥有技能</header>
-		<section ms-repeat="own" class="own"><span>{{el.n}}</span>:{{el.v}}</section>
+		<section ms-repeat="own" class="own" ms-class-1="secondary:$index>=selected.size()" ms-class-2="hide:secondary"><span>{{el.n}}</span>:{{el.v}}</section>
+		<i class="icon-chevron-with-circle-right own-alias" ms-class="on:secondary" ms-click="showSecondary"></i>
 	</section>
 
 	<section class="with-header" ms-if="gem.size() > 0">
