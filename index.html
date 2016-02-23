@@ -15,9 +15,9 @@
 
 
 
-	<script src="scripts/vendor.9e64fea8.js"></script>
+	<script src="scripts/vendor.33f36d66.js"></script>
 
-<script src="scripts/main.1bb851cc.js"></script>
+<script src="scripts/main.7edb8d35.js"></script>
 </head>
 <body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
@@ -52,20 +52,20 @@
 		</section>
 	</section>
 
-	<section class="with-header" ms-if="armor.size() > 0">
-		<header>已拥有技能</header>
-		<section ms-repeat="own" class="own" ms-class-1="secondary:$index>=selected.size()" ms-class-2="hide:secondary"><span>{{el.n}}</span>:{{el.v}}</section>
-		<i class="icon-chevron-with-circle-right own-alias" ms-class="on:secondary" ms-click="showSecondary"></i>
-	</section>
-
 	<section class="with-header" ms-if="gem.size() > 0">
-		<header>可选择的技能珠</header>
+		<header>技能珠</header>
 		<section ms-repeat-gem="gem" class="chosen" ms-class="on:gem.o">
-			<header>{{gem.n}}</header>
+			<header>{{gem.n}}*{{gem.use}}</header>
 			：{{skillJoin(gem.s)}}
 			/材料：{{gem.m}}
 			<i class="icon-chevron-with-circle-right" ms-click="showChosen(gem)"></i>
 		</section>
+	</section>
+
+	<section class="with-header" ms-if="armor.size() > 0">
+		<header>已拥有技能</header>
+		<section ms-repeat="own" class="own" ms-class-1="secondary:$index>=selected.size()" ms-class-2="hide:secondary"><span>{{el.n}}</span>:{{el.v}}</section>
+		<i class="icon-chevron-with-circle-right own-alias" ms-class="on:secondary" ms-click="showSecondary"></i>
 	</section>
 
 	<section class="with-header" ms-if="stone.size() > 0">
