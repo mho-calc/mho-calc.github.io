@@ -11,13 +11,13 @@
 
 
 
-<link rel="stylesheet" href="styles/main.3b1b3f9f.css">
+<link rel="stylesheet" href="styles/main.2c328047.css">
 
 
 
 	<script src="scripts/vendor.8a2b6e35.js"></script>
 
-<script src="scripts/main.4d0358ec.js"></script>
+<script src="scripts/main.6a95d569.js"></script>
 </head>
 <body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
@@ -38,12 +38,15 @@
 			<i class="icon-circle-with-cross" ms-click="$remove"></i>
 		</section>
 		<footer><a class="btn" href="javascript:;" ms-click="listSkill">添加需求</a></footer>
+		<footer>已有护石请勾选这里<input type="checkbox" name="hasStone" ms-duplex-checked="hasStone"/>，并在上面的需求当中减去护石上已有的数值</footer>
 	</section>
 
 	<footer><a class="btn" href="javascript:;" ms-click="calc" ms-if="selected.size() != 0">开始配装</a><a class="btn" href="javascript:;" ms-click="reload">重新读取数据</a></footer>
 
-	<section class="with-header" ms-if="armor.size() > 0">
-		<header>配装结果</header>
+	<header class="result" ms-if="result!=''"><span>{{result}}</span></header>
+
+	<section class="with-header" ms-if="result!=''">
+		<header>防具</header>
 		<section ms-repeat-armor="armor" class="chosen" ms-class="on:armor.o">
 			<header>{{armor.n}}（{{armor.h}}）</header>
 			：{{skillJoin(armor.s)}}
@@ -52,7 +55,7 @@
 		</section>
 	</section>
 
-	<section class="with-header" ms-if="gem.size() > 0">
+	<section class="with-header" ms-if="gem.size()>0 && result!=''">
 		<header>技能珠</header>
 		<section ms-repeat-gem="gem" class="chosen" ms-class="on:gem.o">
 			<header>{{gem.n}}*{{gem.use}}</header>
@@ -62,13 +65,13 @@
 		</section>
 	</section>
 
-	<section class="with-header" ms-if="armor.size() > 0">
+	<section class="with-header" ms-if="result!=''">
 		<header>已拥有技能</header>
 		<section ms-repeat="own" class="own" ms-class-1="secondary:$index>=selected.size()" ms-class-2="hide:secondary"><span>{{el.n}}</span>:{{el.v}}</section>
 		<i class="icon-chevron-with-circle-right own-alias" ms-class="on:secondary" ms-click="showSecondary"></i>
 	</section>
 
-	<section class="with-header" ms-if="stone.size() > 0">
+	<section class="with-header" ms-if="stone.size()>0 && result!='无法配出' && result!=''">
 		<header>可选择的护石及其上限</header>
 		<table class="stone">
 			<tr>
@@ -99,7 +102,7 @@
 			{{info}}
 		</div>
 		<div class="content" ms-if="popup == 'before_loading'">
-			初次载入或重新读取数据会载入2m多的数据文件，建议不要在移动环境载入，避免燃烧流量<br>
+			当前版本为轰龙版本，初次载入或重新读取数据会载入2m多的数据文件，建议不要在移动环境载入，避免燃烧流量<br>
 			<a class="btn" href="javascript:;" ms-click="load">确定载入</a>
 		</div>
 	</div>
