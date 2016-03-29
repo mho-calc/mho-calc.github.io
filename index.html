@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>mho半自动配装器——水龙、角龙版本</title>
+<title>mho半自动配装器——by water_junket</title>
 <!-- Place favicon.ico in the root directory -->
 
 
@@ -15,9 +15,9 @@
 
 
 
-<script src="scripts/vendor.577cecae.js"></script>
+<script src="scripts/vendor.a62fbd27.js"></script>
 
-<script src="scripts/main.ec50bf33.js"></script>
+<script src="scripts/main.a2295c2f.js"></script>
 </head>
 <body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
@@ -102,7 +102,9 @@
 			{{info}}
 		</div>
 		<div class="content" ms-if="popup == 'before_loading'">
-			当前版本为水龙、角龙版本，初次载入或重新读取数据会载入2m多的数据文件，建议不要在移动环境载入，避免燃烧流量<br>
+			<span ms-if="last">当前数据于{{last|date("yy/MM/dd HH:mm")}}获取，如需重新读取</span>
+			<span ms-if="!last">初次载入</span>
+			数据会载入2m多的数据文件，建议不要在移动环境载入，避免燃烧流量<br>
 			<a class="btn" href="javascript:;" ms-click="load">确定载入</a>
 		</div>
 	</div>
