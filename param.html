@@ -17,11 +17,12 @@
 
 <section class="with-header">
 	<header>指定防具</header>
-	<section ms-repeat-armor="armorText" class="selected">
-		<label>{{armor}}</label>
+	<section ms-repeat-armor="selectedArmor" class="selected">
+		<label>{{armorText[ranged?1:0][$index]}}</label>
 		<button class="btn" ms-click="listArmor($index)">
-			{{selectedArmor[$index]?selectedArmor[$index].n:"未指定"}}
+			{{armor?armor.n:"未指定"}}
 		</button>
+		<i class="icon-circle-with-cross" ms-if="armor" ms-click="removeArmor($index)"></i>
 	</section>
 </section>
 
