@@ -1,0 +1,48 @@
+<header class="result"><span>{{result}}</span></header>
+
+<section class="with-header">
+	<header>防具</header>
+	<section ms-repeat-armor="armor" class="chosen" ms-class="on:armor.o">
+		<header>{{armor.n}}（{{armor.h}}）</header>
+		：{{skillJoin(armor.s)}}
+		/材料：{{armor.m}}
+		<i class="icon-chevron-with-circle-right" ms-click="showChosen(armor)"></i>
+	</section>
+</section>
+
+<section class="with-header" ms-if="gem.size()>0">
+	<header>技能珠</header>
+	<section ms-repeat-gem="gem" class="chosen" ms-class="on:gem.o">
+		<header>{{gem.n}}*{{gem.use}}</header>
+		：{{skillJoin(gem.s)}}
+		/材料：{{gem.m}}
+		<i class="icon-chevron-with-circle-right" ms-click="showChosen(gem)"></i>
+	</section>
+</section>
+
+<section class="with-header">
+	<header>已拥有技能</header>
+	<section ms-repeat="own" class="own" ms-class-1="secondary:$index>=selected.size()" ms-class-2="hide:secondary"><span>{{el.n}}</span>:{{el.v}}</section>
+	<i class="icon-chevron-with-circle-right own-alias" ms-class="on:secondary" ms-click="showSecondary"></i>
+</section>
+
+<section class="with-header" ms-if="stone.size()>0 && result!='无法配出' && result!=''">
+	<header>可选择的护石及其上限</header>
+	<table class="stone">
+		<tr>
+			<th></th>
+			<th>兵士</th>
+			<th>斗士</th>
+			<th>骑士</th>
+			<th>女王</th>
+			<th>龙</th>
+		</tr>
+		<tr ms-repeat-list="stone">
+			<td ms-repeat="list">{{el}}</td>
+		</tr>
+	</table>
+</section>
+
+<footer><a class="btn" href="#!/param">返回条件设置</a></footer>
+
+<header class="result"><span>本页地址可做分享用</span></header>

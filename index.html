@@ -11,83 +11,19 @@
 
 
 
-<link rel="stylesheet" href="styles/main.2c328047.css">
+<link rel="stylesheet" href="styles/main.28e53047.css">
 
 
 
-<script src="scripts/vendor.a62fbd27.js"></script>
+<script src="scripts/vendor.c249c5ea.js"></script>
 
-<script src="scripts/main.5c3d13ba.js"></script>
+<script src="scripts/main.c8f26413.js"></script>
 </head>
 <body ms-controller="mho" ms-class="onPopup:popup!=''">
 <!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-<div class="page-wide">
-	<section class="with-header">
-		<header>条件选择</header>
-		<section class="ranged-select">
-			<label for="ranged0" ms-class="cur:!ranged">近战</label><input type="radio" name="ranged" id="ranged0" value="false" ms-duplex-boolean="ranged"/>
-			<label for="ranged1" ms-class="cur:ranged">远程</label><input type="radio" name="ranged" id="ranged1" value="true" ms-duplex-boolean="ranged"/>
-		</section>
-		<section ms-repeat-skill="selected" class="selected">
-			<header>{{skill.n}}</header>
-			<i class="icon-circle-with-minus" ms-click="skillMinus(skill)"></i>
-			<input ms-duplex-number="skill.r" type="number"/>
-			<i class="icon-circle-with-plus" ms-click="skillPlus(skill)"></i>
-			<i class="icon-circle-with-cross" ms-click="$remove"></i>
-		</section>
-		<footer><a class="btn" href="javascript:;" ms-click="listSkill">添加需求</a></footer>
-		<footer>已有护石请勾选这里<input type="checkbox" name="hasStone" ms-duplex-checked="hasStone"/>，并在上面的需求当中减去护石上已有的数值</footer>
-	</section>
-
-	<footer><a class="btn" href="javascript:;" ms-click="calc" ms-if="selected.size() != 0">开始配装</a><a class="btn" href="javascript:;" ms-click="reload">重新读取数据</a></footer>
-
-	<header class="result" ms-if="result!=''"><span>{{result}}</span></header>
-
-	<section class="with-header" ms-if="result!=''">
-		<header>防具</header>
-		<section ms-repeat-armor="armor" class="chosen" ms-class="on:armor.o">
-			<header>{{armor.n}}（{{armor.h}}）</header>
-			：{{skillJoin(armor.s)}}
-			/材料：{{armor.m}}
-			<i class="icon-chevron-with-circle-right" ms-click="showChosen(armor)"></i>
-		</section>
-	</section>
-
-	<section class="with-header" ms-if="gem.size()>0 && result!=''">
-		<header>技能珠</header>
-		<section ms-repeat-gem="gem" class="chosen" ms-class="on:gem.o">
-			<header>{{gem.n}}*{{gem.use}}</header>
-			：{{skillJoin(gem.s)}}
-			/材料：{{gem.m}}
-			<i class="icon-chevron-with-circle-right" ms-click="showChosen(gem)"></i>
-		</section>
-	</section>
-
-	<section class="with-header" ms-if="result!=''">
-		<header>已拥有技能</header>
-		<section ms-repeat="own" class="own" ms-class-1="secondary:$index>=selected.size()" ms-class-2="hide:secondary"><span>{{el.n}}</span>:{{el.v}}</section>
-		<i class="icon-chevron-with-circle-right own-alias" ms-class="on:secondary" ms-click="showSecondary"></i>
-	</section>
-
-	<section class="with-header" ms-if="stone.size()>0 && result!='无法配出' && result!=''">
-		<header>可选择的护石及其上限</header>
-		<table class="stone">
-			<tr>
-				<th></th>
-				<th>兵士</th>
-				<th>斗士</th>
-				<th>骑士</th>
-				<th>女王</th>
-				<th>龙</th>
-			</tr>
-			<tr ms-repeat-list="stone">
-				<td ms-repeat="list">{{el}}</td>
-			</tr>
-		</table>
-	</section>
-</div>
+<div class="page-wide" ms-include-src="{{view}}.html"></div>
 
 <div ms-if="popup != ''" class="popup" ms-click="hidePopup">
 	<div class="popup-wrap">
@@ -96,15 +32,16 @@
 				<label for="condition"><i class="icon-magnifying-glass"></i></label>
 				<input name="condition" ms-duplex="condition" placeholder="输入技能名查找"/>
 			</div>
-			<a ms-repeat-skill="skill" class="skill btn" href="javascript:;" ms-click="addSkill(skill,$index)">{{skill.n}}</a>
+			<a ms-repeat-skill="skill" class="skill btn" href="javascript:;" ms-click="addSkill(skill)">{{skill.n}}</a>
+		</div>
+		<div class="content" ms-if="popup == 'armor_choose'">
+			<a ms-repeat-armor="optionalArmor" class="armor btn" href="javascript:;" ms-click="addArmor($index)"><header>{{armor.n}}</header>：{{skillJoin(armor.s)}}</a>
 		</div>
 		<div class="content" ms-if="popup == 'loading'">
 			{{info}}
 		</div>
 		<div class="content" ms-if="popup == 'before_loading'">
-			<span ms-if="last">当前数据于{{last|date("yy/MM/dd HH:mm")}}获取，如需重新读取</span>
-			<span ms-if="!last">初次载入</span>
-			数据会载入2m多的数据文件，建议不要在移动环境载入，避免燃烧流量<br>
+			<span ms-if="last">当前数据于{{last|date("yy/MM/dd HH:mm")}}获取，如需重新读取</span><span ms-if="!last">初次载入</span>数据会载入2m多的数据文件，建议不要在移动环境载入，避免燃烧流量。如旧数据完全无法使用，则该提示无法跳过。<br>
 			<a class="btn" href="javascript:;" ms-click="load">确定载入</a>
 		</div>
 	</div>

@@ -1,0 +1,39 @@
+<section class="with-header">
+	<header>条件设置</header>
+	<section class="ranged-select">
+		<label for="ranged0" ms-class="cur:!ranged">近战</label><input type="radio" name="ranged" id="ranged0" value="false" ms-duplex-boolean="ranged"/>
+		<label for="ranged1" ms-class="cur:ranged">远程</label><input type="radio" name="ranged" id="ranged1" value="true" ms-duplex-boolean="ranged"/>
+	</section>
+	<section ms-repeat-skill="selected" class="selected">
+		<header>{{skill.n}}</header>
+		<i class="icon-circle-with-minus" ms-click="skillMinus(skill)"></i>
+		<input ms-duplex-number="skill.r" type="number"/>
+		<i class="icon-circle-with-plus" ms-click="skillPlus(skill)"></i>
+		<i class="icon-circle-with-cross" ms-click="$remove"></i>
+	</section>
+	<footer><a class="btn" href="javascript:;" ms-click="listSkill">添加需求</a></footer>
+	<footer>指定护石请勾选这里<input type="checkbox" name="hasStone" ms-duplex-checked="hasStone"/>，并在上面的需求当中减去护石上已有的数值</footer>
+</section>
+
+<section class="with-header">
+	<header>指定防具</header>
+	<section ms-repeat-armor="armorText" class="selected">
+		<label>{{armor}}</label>
+		<button class="btn" ms-click="listArmor($index)">
+			{{selectedArmor[$index]?selectedArmor[$index].n:"未指定"}}
+		</button>
+	</section>
+</section>
+
+<footer><a class="btn" href="javascript:;" ms-click="calc" ms-if="selected.size() != 0">开始配装</a><a class="btn" href="javascript:;" ms-click="reload">重新读取数据</a></footer>
+
+<section class="with-header">
+	<header>简要说明</header>
+	<ol>
+		<li>为减少移动端燃烧流量，默认使用已缓存的数据，如确认已缓存数据已过时，点击重新读取数据即可获得最新数据。如果旧数据完全无法使用，则必须重新载入。</li>
+		<li>本配装器自动配的最优解，和价格无关，优先级依次为以下3点，不需要护石优于需要单属性护石优于需要双属性护石，护石需要技能值与护石技能上限之比较低的优先，装备上总孔数低的优先。前2点在已选好护石的模式下无效。</li>
+		<li>指定部分装备的功能全部为非必选，护石部分直接在需求当中减，做成再选一次技能我不烦你也烦对吧，所以结果页也不会加上护石上的属性；防具部分就不需要手动减了，结果页里面也会自动加上。</li>
+		<li>结果页的地址可以用作分享用。</li>
+		<li>个人原因不希望在百度贴吧公开推广。</li>
+	</ol>
+</section>
